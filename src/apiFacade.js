@@ -1,6 +1,6 @@
 
 
-const URL = "https://skole.rasmuslumholdt.dk/CA3-Backend-1.0-SNAPSHOT";
+const URL = "http://localhost:8080/ydbStockBackend";
 
 
 function handleHttpErrors(res) {

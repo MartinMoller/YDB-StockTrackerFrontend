@@ -1,16 +1,25 @@
 import React from 'react';
 
 class Home extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.state = { gainers: [], losers: [] };
+    }
+
+    componentDidMount = async () => {
+        const gainers = await this.props.ApiFacade.fetchData("/api/stocks/list/gainers", false);
+        this.setState({ gainers: gainers });
+        const losers = await this.props.ApiFacade.fetchData("/api/stocks/list/losers", false);
+        this.setState({ losers: losers });
     }
 
     render() {
         return <div className="container">
-        <h1 className="text-center">Top stocks</h1>
+            <h1 className="text-center">Top gainers</h1>
             <table className="table">
                 <thead>
                     <tr>
+                        <th scope="col">#</th>
                         <th>Ticker</th>
                         <th>Symbol</th>
                         <th>Last price</th>
@@ -18,36 +27,36 @@ class Home extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
+                    {this.state.gainers.map((el, index) =>
+                        <tr>
+                            <th scope="row">{index + 1}</th>
+                            <td>{el.companyName}</td>
+                            <td>{el.symbol}</td>
+                            <td>{el.latestPrice}</td>
+                            <td>{el.change}</td>
+                        </tr>)}
+                </tbody>
+            </table>
+            <h1 className="text-center">Top losers</h1>
+            <table className="table">
+                <thead>
                     <tr>
-                        <td>Google</td>
-                        <td>GOOG</td>
-                        <td>243,52</td>
-                        <td>+5,02</td>
+                        <th scope="col">#</th>
+                        <th>Ticker</th>
+                        <th>Symbol</th>
+                        <th>Last price</th>
+                        <th>Change</th>
                     </tr>
-                    <tr>
-                        <td>Amazon</td>
-                        <td>AMZN</td>
-                        <td>1984,22</td>
-                        <td>+39,64</td>
-                    </tr>
-                    <tr>
-                        <td>Facebook</td>
-                        <td>FB</td>
-                        <td>364,43</td>
-                        <td>-10,42</td>
-                    </tr>
-                    <tr>
-                        <td>Hitachi</td>
-                        <td>HTHIY</td>
-                        <td>3577,52</td>
-                        <td>+70,3</td>
-                    </tr>
-                    <tr>
-                        <td>Microsoft</td>
-                        <td>MSFT</td>
-                        <td>4403,22</td>
-                        <td>+1,44</td>
-                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.losers.map((el, index) =>
+                        <tr>
+                            <th scope="row">{index + 1}</th>
+                            <td>{el.companyName}</td>
+                            <td>{el.symbol}</td>
+                            <td>{el.latestPrice}</td>
+                            <td>{el.change}</td>
+                        </tr>)}
                 </tbody>
             </table>
         </div>

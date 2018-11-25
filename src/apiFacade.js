@@ -1,6 +1,6 @@
 
 
-const URL = "http://localhost:8080/ydbStockBackend";
+const URL = "http://localhost:8084/ydbStockBackend";
 
 
 function handleHttpErrors(res) {
@@ -17,6 +17,7 @@ class ApiFacade {
             headers: {
                 "Content-type": "application/json",
                 'Accept': 'application/json',
+
             }
         }
         if (addToken && this.loggedIn()) {
@@ -49,11 +50,24 @@ class ApiFacade {
             .then(res => { this.setToken(res.token) })
     }
 
+    dummyLogin = () => {
+        return fetch(URL + "/api/dummyLogin")
+            .then(handleHttpErrors)
+            .then(res => { this.setToken(res.token) })
+    }
+
     fetchData = async (params, tokenBool) => {
         const options = this.makeOptions("GET", tokenBool); //True add's the token
         const fetchData = await fetch(URL + params, options);
         const data = await fetchData.json();
         return data;
+    }
+
+    addStockToFav = (params, tokenBool) => {
+        console.log("test api")
+        const options = this.makeOptions("POST", tokenBool);
+        return fetch(URL + params, options)
+            .then(res => res.json())
     }
 
 }

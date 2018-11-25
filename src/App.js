@@ -3,12 +3,27 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import './App.css';
 import Home from './Home';
 import facade from './apiFacade';
+import Login from './Login';
+import MyList from './MyList';
 
 class App extends Component {
   constructor() {
     super();
-    this.state = { LoggedIn: false };
+    this.state = { LoggedIn: false, username: "" };
   }
+
+  login = (user, pass) => {
+    //facade.login(user, pass)
+    facade.dummyLogin()
+      .then(res => this.setState({ LoggedIn: true, username: "martin" }));
+  }
+
+  logout = () => {
+    console.log("logout")
+    facade.logout();
+    this.setState({ LoggedIn: false });
+  }
+
   render() {
     return (
       <div className="App">
@@ -25,7 +40,7 @@ class App extends Component {
                     <li className="nav-item">
                       <NavLink className="nav-link" to="/mylist">Min liste</NavLink>
                     </li>
-                    {!this.state.loggedIn ? (<li><NavLink className="nav-link" to="/logind">Log ind</NavLink></li>) :
+                    {!this.state.LoggedIn ? (<li><NavLink className="nav-link" to="/login">Log ind</NavLink></li>) :
                       (<li>
                         <button className="btn btn-primary" onClick={this.logout}>Logout</button>
                       </li>)}
@@ -33,9 +48,10 @@ class App extends Component {
                 </div>
               </div>
             </nav>
-            <Route exact path="/" render={() => <Home ApiFacade={facade} />} />
-            {//<Route path="/mylist" render={() => <MyList ApiFacade={facade} />} />
-            }
+            <Route exact path="/" render={() => <Home username={this.state.username} LoggedIn={this.state.LoggedIn} ApiFacade={facade} />} />
+            <Route path="/login" render={() => <Login ApiFacade={facade} login={this.login} />} />
+            <Route path="/mylist" render={() => <MyList LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
+
           </div>
         </Router>
       </div>

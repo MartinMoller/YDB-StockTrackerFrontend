@@ -35,12 +35,12 @@ class App extends Component {
                 <div className="collapse navbar-collapse" id="navbarNav">
                   <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                      <NavLink className="nav-link" exact to="/">Hjem</NavLink>
+                      <NavLink className="nav-link" exact to="/">Home</NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink className="nav-link" to="/mylist">Min liste</NavLink>
+                      <NavLink className="nav-link" to="/mylist">My list</NavLink>
                     </li>
-                    {!this.state.LoggedIn ? (<li><NavLink className="nav-link" to="/login">Log ind</NavLink></li>) :
+                    {!this.state.LoggedIn ? (<li><NavLink className="nav-link" to="/login">Log in</NavLink></li>) :
                       (<li>
                         <button className="btn btn-primary" onClick={this.logout}>Logout</button>
                       </li>)}

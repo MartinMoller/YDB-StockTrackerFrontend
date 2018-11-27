@@ -8,13 +8,13 @@ import MyList from './MyList';
 class App extends Component {
   constructor() {
     super();
-    this.state = { LoggedIn: false, username: "" };
+    this.state = { LoggedIn: false, username: "", redirect: false };
   }
 
   login = (user, pass) => {
-    //facade.login(user, pass)
-    facade.dummyLogin()
-      .then(res => this.setState({ LoggedIn: true, username: "martin" }));
+    facade.login(user, pass)
+      //facade.dummyLogin()
+      .then(res => this.setState({ LoggedIn: true, username: user, redirect: true }));
   }
 
   logout = () => {
@@ -50,7 +50,7 @@ class App extends Component {
               </div>
             </nav>
             <Route exact path="/" render={() => <Home username={this.state.username} LoggedIn={this.state.LoggedIn} ApiFacade={facade} />} />
-            <Route path="/login" render={() => <Login ApiFacade={facade} login={this.login} />} />
+            <Route path="/login" render={() => <Login redirect={this.state.redirect} ApiFacade={facade} login={this.login} />} />
             <Route path="/mylist" render={() => <MyList LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
 
           </div>

@@ -1,0 +1,88 @@
+@import "./App.css";
+@import "./index.css";
+@import "./Dark-Colors.scss";
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700');
+
+//Nav start
+.header-nav li a {
+    display:block;
+    color: $text;
+    text-align: center;
+}
+
+.navbar-brand{
+    font-weight: 500;
+    font-size: 20px;
+    float: left;
+    color: $text;
+}
+
+.header-nav{
+    float:right;
+}
+
+.nav-item{
+    float:left;
+}
+
+ul .nav-item:hover{
+    background-color: rgba($color: $text, $alpha: 0.05);
+}
+
+ul .nav-link{
+    color: rgba($color: $text, $alpha: 0.7) !important;
+}
+
+ul .active{
+    color:  white !important;
+}
+
+.nav-link{    
+    padding:30px 16px;
+    display: block;
+    outline: 0;
+    text-decoration: none !important;
+}
+//Nav end
+
+//Table start
+.winner{
+    color:$up;
+}
+.loser{
+    color:$down;
+}
+.table{
+    width: 70%;
+    margin:0 auto;
+}
+.table th, .table td{
+    text-align: left;
+    padding: 0px 5px;
+}
+
+//Table end
+
+//General style start
+body{
+    background-color: $background;
+    color: $text;
+    text-decoration-style: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.header{
+    background-color: $foreground;
+    height: 80px;
+}
+
+.content{
+    padding: 20px 20px;
+}
+ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+}
+//General style end

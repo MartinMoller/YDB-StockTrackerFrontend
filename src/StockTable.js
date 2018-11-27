@@ -1,37 +1,39 @@
 import React from 'react';
 
 
-class MyList extends React.Component {
+class StockTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { myList: [] }
+        this.state = { list: [], url: props.url, user: props.username }
     }
 
     componentDidMount = async () => {
-        if (this.props.LoggedIn) {
-            const myList = await this.props.ApiFacade.fetchData("/api/user/" + this.props.username + "/list/", true);
-            this.setState({ myList: myList });
-            console.log(myList);
+        var list = null;
+        if (this.props.username == null) {
+             list = await this.props.ApiFacade.fetchData(this.state.url, false);
+            this.setState({ list: list });
+        } else {
+            list = await this.props.ApiFacade.fetchData("/api/user/" + this.props.username + "/list/", true);
+            this.setState({ list: list });
         }
     }
 
     render() {
 
         return <div>
-            <h1>My list</h1>
             <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th>Ticker</th>
+                        <th>Name</th>
                         <th>Symbol</th>
-                        <th>Last price</th>
-                        <th>Change</th>
+                        <th>Price</th>
+                        <th>+/-</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.myList.map((el, index) =>
+                    {this.state.list.map((el, index) =>
                         <tr key={index}>
                             <th scope="row">{index + 1}</th>
                             <td>{el.companyName}</td>
@@ -45,4 +47,4 @@ class MyList extends React.Component {
     }
 }
 
-export default MyList;
+export default StockTable;

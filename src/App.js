@@ -37,9 +37,8 @@ class App extends Component {
                     <li className="nav-item">
                       <NavLink className="nav-link" exact to="/">Home</NavLink>
                     </li>
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/mylist">My list</NavLink>
-                    </li>
+                    {this.state.LoggedIn ? (<li><NavLink className="nav-link" to="/mylist">My list</NavLink></li>) :
+                      (<li></li>)}
                     {!this.state.LoggedIn ? (<li><NavLink className="nav-link" to="/login">Log in</NavLink></li>) :
                       (<li>
                         <button className="btn btn-primary" onClick={this.logout}>Logout</button>

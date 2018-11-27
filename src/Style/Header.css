@@ -1,0 +1,20 @@
+.navbar-brand{
+    float: left;
+    color: $text;
+}
+
+.link{
+    text-decoration: none !important;
+}
+
+.navbar-nav{
+    float:right;
+}
+
+.nav-item{
+    float:left;
+}
+
+.nav-link{
+    text-decoration: none !important;
+}

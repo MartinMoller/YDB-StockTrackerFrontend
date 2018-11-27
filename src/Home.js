@@ -1,4 +1,5 @@
 import React from 'react';
+import StockTable from './StockTable';
 
 class Home extends React.Component {
     constructor(props) {
@@ -7,11 +8,10 @@ class Home extends React.Component {
     }
 
     componentDidMount = async () => {
-        const gainers = await this.props.ApiFacade.fetchData("/api/stocks/list/gainers", false);
-        this.setState({ gainers: gainers });
+        //const gainers = await this.props.ApiFacade.fetchData("/api/stocks/list/gainers", false);
+        //this.setState({ gainers: gainers });
         const losers = await this.props.ApiFacade.fetchData("/api/stocks/list/losers", false);
         this.setState({ losers: losers });
-        console.log(gainers);
     }
 
     addStockToFav = (stock) => {
@@ -20,56 +20,14 @@ class Home extends React.Component {
     }
 
     render() {
-        return <div className="container">
-            <h4>{this.state.stockAdded}</h4>
-            <h1 className="text-center">Top gainers</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th>Ticker</th>
-                        <th>Symbol</th>
-                        <th>Last price</th>
-                        <th>Change</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.gainers.map((el, index) =>
-                        <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td>{el.companyName}</td>
-                            <td>{el.symbol}</td>
-                            <td>{el.latestPrice}</td>
-                            <td>{el.change}</td>
-                            {this.props.LoggedIn ? <td><button onClick={() => { this.addStockToFav(el.symbol) }} className="btn btn-primary">Add</button></td> : <td></td>}
-                        </tr>)}
-                </tbody>
-            </table>
-            <h1 className="text-center">Top losers</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th>Ticker</th>
-                        <th>Symbol</th>
-                        <th>Last price</th>
-                        <th>Change</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.losers.map((el, index) =>
-                        <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td>{el.companyName}</td>
-                            <td>{el.symbol}</td>
-                            <td>{el.latestPrice}</td>
-                            <td>{el.change}</td>
-                            {this.props.LoggedIn ? <td><button onClick={() => { this.addStockToFav(el.symbol) }} className="btn btn-primary">Add</button></td> : <td></td>}
-                        </tr>)}
-                </tbody>
-            </table>
+        return <div className="content">
+                <h4>{this.state.stockAdded}</h4>
+
+                <h1 className="winner">Top gainers</h1>
+                <StockTable ApiFacade={this.props.ApiFacade} url="/api/stocks/list/gainers" LoggedIn={this.state.LoggedIn} username={this.state.username}/>
+
+                <h1 className="loser">Top losers</h1>
+                <StockTable ApiFacade={this.props.ApiFacade} url="/api/stocks/list/losers" LoggedIn={this.state.LoggedIn} username={this.state.username}/>
         </div>
     }
 }

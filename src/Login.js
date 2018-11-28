@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import {Redirect} from 'react-router'
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+
 
 class Login extends Component {
     constructor(props) {
@@ -27,6 +29,8 @@ class Login extends Component {
                         <br></br>
                         <input className="form-control" placeholder="Password" id="password" />
                         <br></br>
+                        <NavLink to="/createuser">Create user</NavLink>
+                        <br/>
                         <button className="btn btn-primary">Login</button>
                     </form>
                 </div>

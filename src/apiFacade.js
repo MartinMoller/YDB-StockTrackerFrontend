@@ -45,6 +45,7 @@ class ApiFacade {
 
     login = (user, pass) => {
         const options = this.makeOptions("POST", true, { username: user, password: pass });
+        console.log(options);
         return fetch(URL + "/api/login", options, true)
             .then(handleHttpErrors)
             .then(res => { this.setToken(res.token) })
@@ -64,10 +65,17 @@ class ApiFacade {
     }
 
     addStockToFav = (params, tokenBool) => {
-        console.log("test api")
         const options = this.makeOptions("POST", tokenBool);
         return fetch(URL + params, options)
             .then(res => res.json())
+    }
+
+    createUser = (user, pass) => {
+        const options = this.makeOptions("POST", false, { username: user, password: pass });
+        console.log(options);
+        return fetch(URL + "/api/createUser", options, true)
+            .then(handleHttpErrors)
+            .then(res => { this.setToken(res.token) })
     }
 
 }

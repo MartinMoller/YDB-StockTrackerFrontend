@@ -4,6 +4,7 @@ import Home from './Home';
 import facade from './apiFacade';
 import Login from './Login';
 import MyList from './MyList';
+import CreateUser from './CreateUser';
 
 class App extends Component {
   constructor() {
@@ -18,9 +19,13 @@ class App extends Component {
   }
 
   logout = () => {
-    console.log("logout");
     facade.logout();
     this.setState({ LoggedIn: false });
+  }
+
+  createUser = (user, pass) => {
+    facade.createUser(user, pass)
+      .then(res => this.setState({ LoggedIn: true, username: user, redirect: true }));
   }
 
   render() {
@@ -50,8 +55,9 @@ class App extends Component {
               </div>
             </nav>
             <Route exact path="/" render={() => <Home username={this.state.username} LoggedIn={this.state.LoggedIn} ApiFacade={facade} />} />
-            <Route path="/login" render={() => <Login redirect={this.state.redirect} ApiFacade={facade} login={this.login} />} />
+            <Route path="/login" render={() => <Login redirect={this.state.redirect} login={this.login} />} />
             <Route path="/mylist" render={() => <MyList LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
+            <Route path="/createuser" render={() => <CreateUser redirect={this.state.redirect} createUser={this.createUser} />} />
 
           </div>
         </Router>

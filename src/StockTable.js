@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 
 class StockTable extends React.Component {
@@ -36,7 +37,7 @@ class StockTable extends React.Component {
                     {this.state.list.map((el, index) =>
                         <tr key={index}>
                             <th scope="row">{index + 1}</th>
-                            <td>{el.companyName}</td>
+                            <td><Link to={`/details/${el.symbol}`}>{el.companyName}</Link></td>
                             <td>{el.symbol}</td>
                             <td>{el.latestPrice}</td>
                             <td>{el.change}</td>

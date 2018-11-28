@@ -35,18 +35,18 @@ class App extends Component {
           <div>
             <nav className="header">
               <div className="nav-content">
-                <div className="nav-item">
+                <div className="nav-item hoverEffect">
                   <NavLink className="nav-link navbar-brand" exact to="/">YDB Stock Tracker</NavLink>
                 </div>
                 <div className="header-nav">
                   <ul>
-                    <li className="nav-item">
+                    <li className="nav-item hoverEffect">
                       <NavLink className="nav-link" exact to="/">Home</NavLink>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item hoverEffect">
                       {this.state.LoggedIn && <NavLink className="nav-link" to="/mylist">My list</NavLink>}
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item hoverEffect">
                       {!this.state.LoggedIn ? (<NavLink className="nav-link" to="/login">Log in</NavLink>) :
                         <button className="logout nav-link" onClick={this.logout}>Logout</button>}
                     </li>

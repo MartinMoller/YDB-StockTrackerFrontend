@@ -25,10 +25,6 @@
     float:left;
 }
 
-ul .nav-item:hover{
-    background-color: rgba($color: $text, $alpha: 0.05);
-}
-
 .logout{
     background: none !important;
     color:$down !important;
@@ -55,12 +51,6 @@ ul .active{
 //Nav end
 
 //Table start
-.winner{
-    color:$up;
-}
-.loser{
-    color:$down;
-}
 .table{
     border-collapse: collapse;
     width: 70%;
@@ -69,11 +59,42 @@ ul .active{
 
 table th, table td{
     text-align: left;
-    padding: 0px 5px;
-    height:30px;
     border-bottom: 1px solid $text;
 }
 
+.rowNumber{
+    text-align: center;
+    width: 3%;
+}
+
+.companyName{
+    width:65%;
+}
+
+.symbol{
+    text-align: center;
+    width:9%;
+}
+
+.latestPrice{
+    text-align: center;
+    width: 7%;
+}
+
+.change{
+    text-align: center;
+    width:5%;
+}
+
+.link{
+    //doubting that we need this. Someone decide for me and delete this comment
+    //text-decoration-style: none; 
+    outline: 0;
+    color:$text;
+    padding: 10px 3px;
+    cursor: pointer;
+    display: block;
+}
 //Table end
 
 //General style start
@@ -97,5 +118,41 @@ ul {
     margin:0;
     padding:0;
     overflow: hidden;
+}
+
+.winner{
+    color:$up;
+}
+.loser{
+    color:$down;
+}
+
+.form-control{
+    height: 30px;
+    width: 30%;
+    font-size: 16px;
+    color:$text;
+    background-color: $foreground;
+    border: 1px solid rgba($color: $text, $alpha: 0.2);
+    margin:5px;
+    padding:4px 10px;
+    border-radius: 15px;
+}
+
+.form-submit{
+    background-color: $foreground;
+    color: $text;
+    border: 1px solid rgba($color: $text, $alpha: 0.4);
+    height: 30px;
+    outline: 0;
+    font-size: 16px;
+    margin:5px;
+
+    padding:4px 10px;
+    border-radius: 10px;
+}
+
+.hoverEffect:hover{
+    background: rgba($color: $text, $alpha: 0.1) !important;
 }
 //General style end

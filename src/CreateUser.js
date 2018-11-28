@@ -30,17 +30,17 @@ class CreateUser extends React.Component {
                 <form onSubmit={this.createUser} onChange={this.onChange}>
                     <label>Username</label>
                     <br />
-                    <input type="text" id="username"></input>
+                    <input className="form-control" type="text" id="username"></input>
                     <br />
                     <label>Password</label>
                     <br />
-                    <input type="text" id="password1"></input>
+                    <input className="form-control" type="text" id="password1"></input>
                     <br />
                     <label>Repeat password</label>
                     <br />
-                    <input type="text" id="password2"></input>
+                    <input className="form-control" type="text" id="password2"></input>
                     <br />
-                    <button>Create user</button>
+                    <button className="form-submit hoverEffect">Create user</button>
                 </form>
             </div>
         }

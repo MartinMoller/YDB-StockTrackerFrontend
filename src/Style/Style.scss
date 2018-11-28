@@ -29,6 +29,15 @@ ul .nav-item:hover{
     background-color: rgba($color: $text, $alpha: 0.05);
 }
 
+.logout{
+    background: none !important;
+    color:$down !important;
+    border:none;
+    font:inherit;
+    cursor:pointer;
+    display: inline-block;
+}
+
 ul .nav-link{
     color: rgba($color: $text, $alpha: 0.7) !important;
 }
@@ -53,12 +62,16 @@ ul .active{
     color:$down;
 }
 .table{
+    border-collapse: collapse;
     width: 70%;
     margin:0 auto;
 }
-.table th, .table td{
+
+table th, table td{
     text-align: left;
     padding: 0px 5px;
+    height:30px;
+    border-bottom: 1px solid $text;
 }
 
 //Table end

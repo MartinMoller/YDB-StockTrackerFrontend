@@ -1,7 +1,4 @@
-
-
-const URL = "http://localhost:8084/ydbStockBackend";
-
+const URL = "https://skole.rasmuslumholdt.dk/YDB-StockTackerBackend-1.0-SNAPSHOT";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -45,7 +42,7 @@ class ApiFacade {
 
     login = (user, pass) => {
         const options = this.makeOptions("POST", true, { username: user, password: pass });
-        console.log(options);
+        //console.log(options);
         return fetch(URL + "/api/login", options, true)
             .then(handleHttpErrors)
             .then(res => { this.setToken(res.token) })
@@ -72,7 +69,7 @@ class ApiFacade {
 
     createUser = (user, pass) => {
         const options = this.makeOptions("POST", false, { username: user, password: pass });
-        console.log(options);
+        //console.log(options);
         return fetch(URL + "/api/createUser", options, true)
             .then(handleHttpErrors)
             .then(res => { this.setToken(res.token) })

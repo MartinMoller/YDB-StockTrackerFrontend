@@ -1,5 +1,5 @@
 import React from 'react';
-
+import StockTable from './StockTable';
 
 class MyList extends React.Component {
     constructor(props) {
@@ -17,30 +17,9 @@ class MyList extends React.Component {
 
     render() {
 
-        return <div>
+        return <div className="content">
             <h1>My list</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th>Ticker</th>
-                        <th>Symbol</th>
-                        <th>Last price</th>
-                        <th>Change</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.myList.map((el, index) =>
-                        <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td>{el.companyName}</td>
-                            <td>{el.symbol}</td>
-                            <td>{el.latestPrice}</td>
-                            <td>{el.change}</td>
-                        </tr>)}
-                </tbody>
-            </table>
+            <StockTable ApiFacade={this.props.ApiFacade} LoggedIn={this.state.LoggedIn} username={this.state.username}/>
         </div>
     }
 }

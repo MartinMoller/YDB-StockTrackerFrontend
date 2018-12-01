@@ -20,7 +20,7 @@ class App extends Component {
 
   logout = () => {
     facade.logout();
-    this.setState({ LoggedIn: false });
+    this.setState({ LoggedIn: false, redirect: false });
   }
 
   createUser = (user, pass) => {

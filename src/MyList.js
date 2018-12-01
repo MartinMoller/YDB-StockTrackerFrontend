@@ -17,31 +17,39 @@ class MyList extends React.Component {
 
     render() {
 
-        return <div>
-            <h1>My list</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th>Ticker</th>
-                        <th>Symbol</th>
-                        <th>Last price</th>
-                        <th>Change</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.myList.map((el, index) =>
-                        <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td>{el.companyName}</td>
-                            <td>{el.symbol}</td>
-                            <td>{el.latestPrice}</td>
-                            <td>{el.change}</td>
-                        </tr>)}
-                </tbody>
-            </table>
-        </div>
+        if (Array.isArray(this.state.myList)) {
+            return <div>
+                <h1>My list</h1>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th>Ticker</th>
+                            <th>Symbol</th>
+                            <th>Last price</th>
+                            <th>Change</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.myList.map((el, index) =>
+                            <tr key={index}>
+                                <th scope="row">{index + 1}</th>
+                                <td>{el.companyName}</td>
+                                <td>{el.symbol}</td>
+                                <td>{el.latestPrice}</td>
+                                <td>{el.change}</td>
+                            </tr>)}
+                    </tbody>
+                </table>
+            </div>
+        }
+        else {
+            return <div>
+                <h1>My list</h1>
+                <h3>{this.state.myList}</h3>
+            </div>
+        }
     }
 }
 

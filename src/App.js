@@ -53,7 +53,7 @@ class App extends Component {
             <Route exact path="/" render={() => <Home username={this.state.username} LoggedIn={this.state.LoggedIn} ApiFacade={facade} />} />
             <Route path="/login" render={() => <Login redirect={this.state.redirect} ApiFacade={facade} login={this.login} />} />
             <Route path="/mylist" render={() => <MyList LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
-            <Route path="/details/:symbol" render={() => <StockDetail />} />
+            <Route path="/details/:symbol" render={(props) => <StockDetail {...props} LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade}/>} />
 
           </div>
         </Router>

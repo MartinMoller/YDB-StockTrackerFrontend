@@ -39,12 +39,13 @@ class StockTable extends React.Component {
                         <tr className="hoverEffect" key={index}>
                             <td className="rowNumber" scope="row">{index + 1}</td>
                             <td className="symbol">{el.symbol}</td>
-                            <td className="companyName"><Link to={"/details/" + el.symbol} className="link">{el.companyName}</Link></td>
+                            <td className="companyName"><Link to={`/details/${el.symbol}`} className="link">{el.companyName}</Link></td>
                             <td className="latestPrice">{el.latestPrice}</td>
                             <td className="change">{el.change}</td>
                             {
                                 this.state.url && this.state.LoggedIn && <td><button>add</button></td>//this adds an "add" button if we're on home and if the user is logged in
                             }
+
                         </tr>)}
                 </tbody>
             </table>

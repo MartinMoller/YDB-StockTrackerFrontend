@@ -5,6 +5,7 @@ import facade from './apiFacade';
 import Login from './Login';
 import MyList from './MyList';
 import CreateUser from './CreateUser';
+import StockDetail from './StockDetail';
 
 class App extends Component {
   constructor() {
@@ -59,6 +60,7 @@ class App extends Component {
             <Route path="/login" render={() => <Login redirect={this.state.redirect} login={this.login} />} />
             <Route path="/mylist" render={() => <MyList LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
             <Route path="/createuser" render={() => <CreateUser redirect={this.state.redirect} createUser={this.createUser} />} />
+            <Route path="/details/:symbol" render={(props) => <StockDetail {...props} LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade}/>} />
 
           </div>
         </Router>

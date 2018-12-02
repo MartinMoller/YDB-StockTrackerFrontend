@@ -1,4 +1,4 @@
-const URL = "http://localhost:8084/ydbStockBackend";
+const URL = "http://localhost:8080/ydbStockBackend";
 
 function handleHttpErrors(res) {
     if (!res.ok) {

@@ -36,7 +36,7 @@ class App extends Component {
           <div>
             <nav className="header">
               <div className="nav-content">
-                <div className="nav-item hoverEffect">
+                <div>
                   <NavLink className="nav-link navbar-brand" exact to="/">YDB Stock Tracker</NavLink>
                 </div>
                 <div className="header-nav">

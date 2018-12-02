@@ -8,25 +8,28 @@ class StockDetail extends Component {
         this.state = { user: props.username, stock: "empty", userList: [] };
     }
 
-    componentDidMount = async() => {
-        
+    componentDidMount = async () => {
+
         //Get the users symbollist if they are logged in.
         if (this.props.LoggedIn) {
             const userList = await this.props.ApiFacade.fetchData("/api/user/" + this.props.username + "/list/", true);
-            let symbols = userList.map((stock) => {
-                return stock.symbol});
-            this.setState({ userList: symbols });
+            if (Array.isArray(userList)) {
+                let symbols = userList.map((stock) => {
+                    return stock.symbol
+                });
+                this.setState({ userList: symbols });
+            }
 
         }
 
         let fetchRes = await this.props.ApiFacade.fetchData("/api/stocks/single/" + this.props.match.params.symbol, false);
         this.setState({ stock: fetchRes });
-        
-        
+
+
         this.timerID = setInterval(() => this.tick(),
             5000
         );
-        
+
         console.log(this.state.stock);
         console.log(this.props);
     }
@@ -35,7 +38,7 @@ class StockDetail extends Component {
         clearInterval(this.timerID);
     }
 
-    tick = async() => {
+    tick = async () => {
         let fetchRes = await this.props.ApiFacade.fetchData("/api/stocks/single/" + this.props.match.params.symbol, false);
         this.setState({
             list: fetchRes
@@ -55,7 +58,7 @@ class StockDetail extends Component {
 
 
     render() {
-        if(this.state.stock === "empty") {
+        if (this.state.stock === "empty") {
             return (
                 <div>
                     <h2>Loading...</h2>
@@ -64,16 +67,16 @@ class StockDetail extends Component {
         }
 
         const stock = this.state.stock;
-        return(
+        return (
             <div>
                 <h1>{stock.companyName}</h1>
                 <h3>{stock.symbol}</h3>
-                
-                
-                
-                
-                <img src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" style={{ width: 500, height: 300 }}/>
-                
+
+
+
+
+                <img src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" style={{ width: 500, height: 300 }} />
+
                 <table className="table">
                     <thead>
                         <tr>
@@ -83,13 +86,13 @@ class StockDetail extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        
-                            <tr className="hoverEffect" key={stock.name}>
-                                <td className="symbol">{stock.symbol}</td>
-                                <td className="latestPrice">{stock.latestPrice}</td>
-                                <td className="change">{stock.change}</td>
 
-                            </tr>
+                        <tr className="hoverEffect" key={stock.name}>
+                            <td className="symbol">{stock.symbol}</td>
+                            <td className="latestPrice">{stock.latestPrice}</td>
+                            <td className="change">{stock.change}</td>
+
+                        </tr>
                     </tbody>
                 </table>
 
@@ -100,7 +103,7 @@ class StockDetail extends Component {
                 {console.log(this.state.stock)}
             </div>
         )
-        
+
     }
 
 }

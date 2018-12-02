@@ -35,23 +35,24 @@ class App extends Component {
           <div>
             <nav className="header">
               <div className="nav-content">
-                <div className="nav-item">
+                <div className="nav-item hoverEffect">
                   <NavLink className="nav-link navbar-brand" exact to="/">YDB Stock Tracker</NavLink>
                 </div>
-                <ul>
-                  <div className="header-nav">
-                    <li className="nav-item">
+                <div className="header-nav">
+                  <ul>
+                    <li className="nav-item hoverEffect">
                       <NavLink className="nav-link" exact to="/">Home</NavLink>
                     </li>
-                    {this.state.LoggedIn ? (<li><NavLink className="nav-link" to="/mylist">My list</NavLink></li>) :
-                      (<li></li>)}
-                    {!this.state.LoggedIn ? (<li><NavLink className="nav-link" to="/login">Log in</NavLink></li>) :
-                      (<li>
-                        <button className="btn btn-primary" onClick={this.logout}>Logout</button>
-                      </li>)}
+                    <li className="nav-item hoverEffect">
+                      {this.state.LoggedIn && <NavLink className="nav-link" to="/mylist">My list</NavLink>}
+                    </li>
+                    <li className="nav-item hoverEffect">
+                      {!this.state.LoggedIn ? (<NavLink className="nav-link" to="/login">Log in</NavLink>) :
+                        <button className="logout nav-link" onClick={this.logout}>Logout</button>}
+                    </li>
+                  </ul>
+                </div>
 
-                  </div>
-                </ul>
               </div>
             </nav>
             <Route exact path="/" render={() => <Home username={this.state.username} LoggedIn={this.state.LoggedIn} ApiFacade={facade} />} />

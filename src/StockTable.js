@@ -19,7 +19,6 @@ class StockTable extends React.Component {
     }
 
     render() {
-
         return <div>
             <table className="table">
                 <thead>

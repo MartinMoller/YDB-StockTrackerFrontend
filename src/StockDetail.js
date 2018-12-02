@@ -23,10 +23,24 @@ class StockDetail extends Component {
         this.setState({ stock: fetchRes });
         
         
-        
+        this.timerID = setInterval(() => this.tick(),
+            5000
+        );
         
         console.log(this.state.stock);
         console.log(this.props);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick = async() => {
+        let fetchRes = await this.props.ApiFacade.fetchData("/api/stocks/single/" + this.props.match.params.symbol, false);
+        this.setState({
+            list: fetchRes
+        })
+        console.log("HEJ")
     }
 
     checkIfUserFollow = () => {
@@ -60,7 +74,25 @@ class StockDetail extends Component {
                 
                 <img src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" style={{ width: 500, height: 300 }}/>
                 
-                
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th className="symbol">Symbol</th>
+                            <th className="latestPrice">Price</th>
+                            <th className="change">+/-</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            <tr className="hoverEffect" key={stock.name}>
+                                <td className="symbol">{stock.symbol}</td>
+                                <td className="latestPrice">{stock.latestPrice}</td>
+                                <td className="change">{stock.change}</td>
+
+                            </tr>
+                    </tbody>
+                </table>
+
                 {this.checkIfUserFollow() === true && //If 
                     <h1>Follow this stock</h1>
                 }

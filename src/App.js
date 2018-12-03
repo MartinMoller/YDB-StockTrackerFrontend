@@ -16,7 +16,8 @@ class App extends Component {
   login = (user, pass) => {
     facade.login(user, pass)
       //facade.dummyLogin()
-      .then(res => this.setState({ LoggedIn: true, username: user, redirect: true }));
+      .then(res => this.setState({ LoggedIn: true, username: user, redirect: true }))
+      .catch(error => alert("Invalid username or password"));
   }
 
   logout = () => {
@@ -26,7 +27,8 @@ class App extends Component {
 
   createUser = (user, pass) => {
     facade.createUser(user, pass)
-      .then(res => this.setState({ LoggedIn: true, username: user, redirect: true }));
+      .then(res => this.setState({ LoggedIn: true, username: user, redirect: true }))
+      .catch(error => alert("Username already exists"));
   }
 
   render() {
@@ -60,7 +62,7 @@ class App extends Component {
             <Route path="/login" render={() => <Login redirect={this.state.redirect} login={this.login} />} />
             <Route path="/mylist" render={() => <MyList LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
             <Route path="/createuser" render={() => <CreateUser redirect={this.state.redirect} createUser={this.createUser} />} />
-            <Route path="/details/:symbol" render={(props) => <StockDetail {...props} LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade}/>} />
+            <Route path="/details/:symbol" render={(props) => <StockDetail {...props} LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
 
           </div>
         </Router>

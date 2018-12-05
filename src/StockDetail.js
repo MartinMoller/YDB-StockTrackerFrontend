@@ -29,8 +29,8 @@ class StockDetail extends Component {
             5000
         );
 
-        console.log(this.state.stock);
-        console.log(this.props);
+        //console.log(this.state.stock);
+        //console.log(this.props);
     }
 
     componentWillUnmount() {
@@ -42,7 +42,7 @@ class StockDetail extends Component {
         this.setState({
             list: fetchRes
         })
-        console.log("HEJ")
+        //console.log("HEJ")
     }
 
     checkIfUserFollow = () => {
@@ -54,13 +54,13 @@ class StockDetail extends Component {
         }
 
 
-        console.log(this.state.username)
+        //console.log(this.state.username)
         return false;
     }
 
 
     render() {
-        console.log("USernmae" + this.props.username)
+        //console.log("USernmae" + this.props.username)
         if (this.state.stock === "empty") {
             return (
                 <div>
@@ -139,8 +139,6 @@ class StockDetail extends Component {
 
                     <h1>Unfollow this stock</h1>
                 }
-
-                {console.log(this.state.stock)}
             </div>
         )
 

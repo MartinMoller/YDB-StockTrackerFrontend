@@ -58,7 +58,7 @@ class ApiFacade {
         const options = this.makeOptions("GET", tokenBool); //True add's the token
         const fetchData = await fetch(URL + params, options);
         const data = await fetchData.json();
-        console.log(data);
+        //console.log(data);
         return data;
     }
 

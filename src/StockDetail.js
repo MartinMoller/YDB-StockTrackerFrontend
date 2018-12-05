@@ -95,7 +95,7 @@ class StockDetail extends Component {
                                     <td className="stockInfoNumber">{stock.change}</td>
                                 </tr>
                                 <tr>
-                                    <td>Prev. Close</td>
+                                    <td>Percent Change</td>
                                     <td className="stockInfoNumber">{this.truncate(stock.changePercent*100,4)}%</td>
                                 </tr>
                             </tbody>

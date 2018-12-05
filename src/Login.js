@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Redirect } from 'react-router'
-import { BrowserRouter as NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 
 class Login extends Component {

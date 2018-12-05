@@ -12,7 +12,7 @@ class StockDetail extends Component {
 
         //Get the users symbollist if they are logged in.
         if (this.props.LoggedIn) {
-            const userList = await this.props.ApiFacade.fetchData("/api/user/" + this.props.username + "/list/", true);
+            const userList = await this.props.ApiFacade.fetchData("/api/user/" + this.props.username + "/symList/", true);
             if (Array.isArray(userList)) {
                 let symbols = userList.map((stock) => {
                     return stock.symbol

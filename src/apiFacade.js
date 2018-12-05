@@ -1,4 +1,7 @@
+
+
 const URL = "http://localhost:8084/ydbStockBackend";
+
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -42,7 +45,7 @@ class ApiFacade {
 
     login = (user, pass) => {
         const options = this.makeOptions("POST", true, { username: user, password: pass });
-        //console.log(options);
+        console.log(options);
         return fetch(URL + "/api/login", options, true)
             .then(handleHttpErrors)
             .then(res => { this.setToken(res.token) })
@@ -58,7 +61,6 @@ class ApiFacade {
         const options = this.makeOptions("GET", tokenBool); //True add's the token
         const fetchData = await fetch(URL + params, options);
         const data = await fetchData.json();
-        console.log(data);
         return data;
     }
 
@@ -68,9 +70,15 @@ class ApiFacade {
             .then(res => res.json())
     }
 
+    removeStockFromFav = (params, tokenBool) => {
+        const options = this.makeOptions("DELETE", tokenBool);
+        return fetch(URL + params, options)
+            .then(res => res)
+    }
+
     createUser = (user, pass) => {
         const options = this.makeOptions("POST", false, { username: user, password: pass });
-        //console.log(options);
+        console.log(options);
         return fetch(URL + "/api/createUser", options, true)
             .then(handleHttpErrors)
             .then(res => { this.setToken(res.token) })

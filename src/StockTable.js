@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class StockTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { list: [], url: props.url }
+        this.state = { list: [], url: props.url, userList: [] }
     }
 
     componentDidMount = async () => {
@@ -29,9 +29,6 @@ class StockTable extends React.Component {
                             <th className="companyName">Name</th>
                             <th className="latestPrice">Price</th>
                             <th className="change">+/-</th>
-                            {
-                                this.state.url && this.props.LoggedIn && <th>add</th>//this adds an "add" header if we're on home and if the user is logged in
-                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -42,10 +39,6 @@ class StockTable extends React.Component {
                                 <td className="companyName"><Link to={`/details/${el.symbol}`} className="link">{el.companyName}</Link></td>
                                 <td className="latestPrice">{el.latestPrice}</td>
                                 <td className="change">{el.change}</td>
-                                {
-                                    this.state.url && this.state.LoggedIn && <td><button>add</button></td>//this adds an "add" button if we're on home and if the user is logged in
-                                }
-
                             </tr>)}
                     </tbody>
                 </table>

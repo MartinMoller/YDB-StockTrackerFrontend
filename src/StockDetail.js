@@ -5,7 +5,7 @@ class StockDetail extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { user: props.username, stock: "empty", userList: [] };
+        this.state = { user: props.username, stock: "empty", userList: [], following: false };
     }
 
     componentDidMount = async () => {
@@ -13,12 +13,10 @@ class StockDetail extends Component {
         //Get the users symbollist if they are logged in.
         if (this.props.LoggedIn) {
             const userList = await this.props.ApiFacade.fetchData("/api/user/" + this.props.username + "/list/", true);
-            if (Array.isArray(userList)) {
-                let symbols = userList.map((stock) => {
-                    return stock.symbol
-                });
-                this.setState({ userList: symbols });
-            }
+            let symbols = userList.map((stock) => {
+                return stock.symbol
+            });
+            this.setState({ userList: symbols });
 
         }
 
@@ -54,6 +52,28 @@ class StockDetail extends Component {
 
         console.log(this.state.username)
         return false;
+    }
+
+    addStockToFav = async (evt) => {
+        evt.preventDefault();
+        await this.props.ApiFacade.addStockToFav("/api/user/" + this.props.username + "/add/" + this.props.match.params.symbol, true)
+            .then(res => this.setState(this.state));
+        console.log("follow state" + this.state.following);
+    }
+
+    removeStockFromFav = (evt) => {
+        evt.preventDefault();
+        this.props.ApiFacade.removeStockFromFav("/api/user/" + this.props.username + "/remove/" + this.props.match.params.symbol, true);
+    }
+
+    followButton = () => {
+        if (this.props.LoggedIn && this.checkIfUserFollow()) {
+            return <form onSubmit={this.addStockToFav}><button>Follow</button></form>
+        }
+        else if (this.props.LoggedIn && !this.checkIfUserFollow()) {
+            return <form onSubmit={this.removeStockFromFav}><button>Unfollow</button></form>
+        }
+        else return null;
     }
 
 
@@ -95,10 +115,7 @@ class StockDetail extends Component {
                         </tr>
                     </tbody>
                 </table>
-
-                {this.checkIfUserFollow() === true && //If 
-                    <h1>Follow this stock</h1>
-                }
+                <this.followButton />
 
                 {console.log(this.state.stock)}
             </div>

@@ -21,13 +21,13 @@ class Home extends React.Component {
 
     render() {
         return <div className="content">
-                <h4>{this.state.stockAdded}</h4>
+            <h4>{this.state.stockAdded}</h4>
 
-                <h1 className="winner">Top gainers</h1>
-                <StockTable ApiFacade={this.props.ApiFacade} url="/api/stocks/list/gainers" LoggedIn={this.state.LoggedIn} username={this.state.username}/>
+            <h1 className="winner">Top gainers</h1>
+            <StockTable ApiFacade={this.props.ApiFacade} fromHome={true} url="/api/stocks/list/gainers" LoggedIn={this.props.LoggedIn} username={this.state.username} />
 
-                <h1 className="loser">Top losers</h1>
-                <StockTable ApiFacade={this.props.ApiFacade} url="/api/stocks/list/losers" LoggedIn={this.state.LoggedIn} username={this.state.username}/>
+            <h1 className="loser">Top losers</h1>
+            <StockTable ApiFacade={this.props.ApiFacade} url="/api/stocks/list/losers" LoggedIn={this.props.LoggedIn} username={this.state.username} />
         </div>
     }
 }

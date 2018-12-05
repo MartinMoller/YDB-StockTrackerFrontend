@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 
 class StockTable extends React.Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class StockTable extends React.Component {
                     <tbody>
                         {this.state.list.map((el, index) =>
                             <tr className="hoverEffect" key={index}>
-                                <td className="rowNumber" scope="row">{index + 1}</td>
+                                <td className="rowNumber">{index + 1}</td>
                                 <td className="symbol">{el.symbol}</td>
                                 <td className="companyName"><Link to={`/details/${el.symbol}`} className="link">{el.companyName}</Link></td>
                                 <td className="latestPrice">{el.latestPrice}</td>

@@ -1,4 +1,4 @@
-const URL = "http://localhost:8084/ydbStockBackend";
+const URL = "https://skole.rasmuslumholdt.dk/YDB-StockTackerBackend-1.0-SNAPSHOT";
 
 function handleHttpErrors(res) {
     if (!res.ok) {

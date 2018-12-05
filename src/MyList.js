@@ -17,7 +17,7 @@ class MyList extends React.Component {
     }
 
     render() {
-        if (this.props.LoggedIn == false) {
+        if (this.props.LoggedIn === false) {
             return <Redirect exact to="/" />
         }
 

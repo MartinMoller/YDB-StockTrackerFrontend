@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 class StockDetail extends Component {
 
@@ -61,7 +60,7 @@ class StockDetail extends Component {
 
 
     render() {
-        console.log("USernmae" +this.props.username)
+        console.log("USernmae" + this.props.username)
         if (this.state.stock === "empty") {
             return (
                 <div>
@@ -81,31 +80,64 @@ class StockDetail extends Component {
 
                 <img src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" style={{ width: 500, height: 300 }} />
 
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th className="symbol">Symbol</th>
-                            <th className="latestPrice">Price</th>
-                            <th className="change">+/-</th>
-                        </tr>
-                    </thead>
+                <div className="detailsBox">
+                    <table className="detailsTable">
                     <tbody>
-
-                        <tr className="hoverEffect" key={stock.name}>
-                            <td className="symbol">{stock.symbol}</td>
-                            <td className="latestPrice">{stock.latestPrice}</td>
-                            <td className="change">{stock.change}</td>
-
+                        <tr>
+                            <td>Low</td>
+                            <td className="stockInfoNumber">{stock.low}</td>
                         </tr>
-                    </tbody>
-                </table>
+                        <tr>
+                            <td>High</td>
+                            <td className="stockInfoNumber">{stock.high}</td>
+                        </tr>
+                        <tr>
+                            <td>Prev. Close</td>
+                            <td className="stockInfoNumber">{stock.previousClose}</td>
+                        </tr>
+                        <tr>
+                            <td>Open</td>
+                            <td className="stockInfoNumber">{stock.open}</td>
+                        </tr>
+                        <tr>
+                            <td>Volume</td>
+                            <td className="stockInfoNumber">{stock.latestVolume}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table className="detailsTable">
+                    <tbody>
+                        <tr>
+                            <td>52 Week Low</td>
+                            <td className="stockInfoNumber">{stock.week52Low}</td>
+                        </tr>
+                        <tr>
+                            <td>52 Week High</td>
+                            <td className="stockInfoNumber">{stock.week52High}</td>
+                        </tr>
+                        <tr>
+                            <td>Marketcap</td>
+                            <td className="stockInfoNumber">{stock.marketCap}</td>
+                        </tr>
+                        <tr>
+                            <td>P/E</td>
+                            <td className="stockInfoNumber">{stock.peRatio === null ? "No info" : stock.peRatio}</td>
+                        </tr>
+                        <tr>
+                            <td>YTD</td>
+                            <td className="stockInfoNumber">{stock.ytdChange}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 {this.checkIfUserFollow() === true && //If 
                     <h1>Follow this stock</h1>
                 }
-                { this.checkIfUserFollow() === false && this.props.username !== "" &&  //If 
-                    
-                        <h1>Unfollow this stock</h1>
+                {this.checkIfUserFollow() === false && this.props.username !== "" &&  //If 
+
+                    <h1>Unfollow this stock</h1>
                 }
 
                 {console.log(this.state.stock)}

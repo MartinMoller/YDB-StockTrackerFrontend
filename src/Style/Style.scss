@@ -156,3 +156,29 @@ ul {
     background: rgba($color: $text, $alpha: 0.1) !important;
 }
 //General style end
+
+//Details page
+.detailsBox{
+    margin:auto;
+}
+
+.detailsTable{
+    color:rgba($color: $text, $alpha: 0.6);
+    border-radius: 8px;
+    width: 30%;
+    float:left;
+    padding: 8px 8px;
+    background-color: $foreground;
+    margin: 5px 5px;
+}
+
+.detailsTable td{
+    border:none;
+}
+
+.stockInfoNumber{
+    color:$text;
+    float:right;
+}
+
+//Details page end

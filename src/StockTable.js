@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Link } from "react-router-dom";
+import { BrowserRouter as Router, NavRouter, Link } from "react-router-dom";
 
 class StockTable extends React.Component {
     constructor(props) {
@@ -18,6 +18,13 @@ class StockTable extends React.Component {
         }
     }
 
+    truncate(s, truncLength) {
+        let workString = JSON.stringify(s);
+        if (workString.length >= truncLength)
+            return workString.substring(0, truncLength);
+        else
+            return workString;
+    }
     render() {
         if (Array.isArray(this.state.list)) {
             return <div>
@@ -29,6 +36,7 @@ class StockTable extends React.Component {
                             <th className="companyName">Name</th>
                             <th className="latestPrice">Price</th>
                             <th className="change">+/-</th>
+                            <th className="change">%</th>
                             {
                                 this.state.url && this.props.LoggedIn && <th>add</th>//this adds an "add" header if we're on home and if the user is logged in
                             }
@@ -40,8 +48,10 @@ class StockTable extends React.Component {
                                 <td className="rowNumber">{index + 1}</td>
                                 <td className="symbol">{el.symbol}</td>
                                 <td className="companyName"><Link to={`/details/${el.symbol}`} className="link">{el.companyName}</Link></td>
-                                <td className="latestPrice">{el.latestPrice}</td>
+                                <td className="latestPrice">${el.latestPrice}</td>
                                 <td className="change">{el.change}</td>
+                                <td className="change">{this.truncate(el.changePercent*100, 4)}%</td>
+
                                 {
                                     this.state.url && this.state.LoggedIn && <td><button>add</button></td>//this adds an "add" button if we're on home and if the user is logged in
                                 }

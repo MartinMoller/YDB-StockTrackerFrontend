@@ -58,6 +58,13 @@ class StockDetail extends Component {
         return false;
     }
 
+    truncate(s, truncLength) {
+        let workString = JSON.stringify(s);
+        if (workString.length >= truncLength)
+            return workString.substring(0, truncLength);
+        else
+            return workString;
+    }
 
     render() {
         //console.log("USernmae" + this.props.username)
@@ -72,66 +79,81 @@ class StockDetail extends Component {
         const stock = this.state.stock;
         return (
             <div>
-                <h1>{stock.companyName}</h1>
-                <h3>{stock.symbol}</h3>
-
-
-
-
-                <img src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" style={{ width: 500, height: 300 }} />
-
+                <h1>{stock.companyName} ({stock.symbol})</h1>
                 <div className="detailsBox">
-                    <table className="detailsTable">
-                    <tbody>
-                        <tr>
-                            <td>Low</td>
-                            <td className="stockInfoNumber">{stock.low}</td>
-                        </tr>
-                        <tr>
-                            <td>High</td>
-                            <td className="stockInfoNumber">{stock.high}</td>
-                        </tr>
-                        <tr>
-                            <td>Prev. Close</td>
-                            <td className="stockInfoNumber">{stock.previousClose}</td>
-                        </tr>
-                        <tr>
-                            <td>Open</td>
-                            <td className="stockInfoNumber">{stock.open}</td>
-                        </tr>
-                        <tr>
-                            <td>Volume</td>
-                            <td className="stockInfoNumber">{stock.latestVolume}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div className="graphPriceContainer">
+                        <div className="graphPriceInfo">
+                            <img className="graph" src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" />
+                            <table className="detailsTable">
+                            <tbody>
+                                <tr>
+                                    <td>Price</td>
+                                    <td className="stockInfoNumber">${stock.latestPrice}</td>
+                                </tr>
+                                <tr>
+                                    <td>+/-</td>
+                                    <td className="stockInfoNumber">{stock.change}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prev. Close</td>
+                                    <td className="stockInfoNumber">{this.truncate(stock.changePercent*100,4)}%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <div className="detailsTableContainer">
+                        <table className="detailsTable">
+                            <tbody>
+                                <tr>
+                                    <td>Low</td>
+                                    <td className="stockInfoNumber">{stock.low}</td>
+                                </tr>
+                                <tr>
+                                    <td>High</td>
+                                    <td className="stockInfoNumber">{stock.high}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prev. Close</td>
+                                    <td className="stockInfoNumber">{stock.previousClose}</td>
+                                </tr>
+                                <tr>
+                                    <td>Open</td>
+                                    <td className="stockInfoNumber">{stock.open}</td>
+                                </tr>
+                                <tr>
+                                    <td>Volume</td>
+                                    <td className="stockInfoNumber">{stock.latestVolume}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <table className="detailsTable">
-                    <tbody>
-                        <tr>
-                            <td>52 Week Low</td>
-                            <td className="stockInfoNumber">{stock.week52Low}</td>
-                        </tr>
-                        <tr>
-                            <td>52 Week High</td>
-                            <td className="stockInfoNumber">{stock.week52High}</td>
-                        </tr>
-                        <tr>
-                            <td>Marketcap</td>
-                            <td className="stockInfoNumber">{stock.marketCap}</td>
-                        </tr>
-                        <tr>
-                            <td>P/E</td>
-                            <td className="stockInfoNumber">{stock.peRatio === null ? "No info" : stock.peRatio}</td>
-                        </tr>
-                        <tr>
-                            <td>YTD</td>
-                            <td className="stockInfoNumber">{stock.ytdChange}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <table className="detailsTable">
+                            <tbody>
+                                <tr>
+                                    <td>52wk Low</td>
+                                    <td className="stockInfoNumber">{stock.week52Low}</td>
+                                </tr>
+                                <tr>
+                                    <td>52wk High</td>
+                                    <td className="stockInfoNumber">{stock.week52High}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mkt Cap</td>
+                                    <td className="stockInfoNumber">{stock.marketCap}</td>
+                                </tr>
+                                <tr>
+                                    <td>P/E</td>
+                                    <td className="stockInfoNumber">{stock.peRatio === null ? "No info" : stock.peRatio}</td>
+                                </tr>
+                                <tr>
+                                    <td>YTD</td>
+                                    <td className="stockInfoNumber">{this.truncate(stock.ytdChange, 5)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
                 {this.checkIfUserFollow() === true && //If 
                     <h1>Follow this stock</h1>
                 }

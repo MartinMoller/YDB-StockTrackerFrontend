@@ -158,15 +158,19 @@ ul {
 //General style end
 
 //Details page
-.detailsBox{
+.detailsBox, .detailsContent{
+    width: 100%;
+}
+
+.detailsTableContainer{
     margin:auto;
 }
 
 .detailsTable{
+    width:250px;
     color:rgba($color: $text, $alpha: 0.6);
     border-radius: 8px;
-    width: 30%;
-    float:left;
+    display: inline-block;
     padding: 8px 8px;
     background-color: $foreground;
     margin: 5px 5px;
@@ -174,11 +178,32 @@ ul {
 
 .detailsTable td{
     border:none;
+    width:100%;
+
 }
 
 .stockInfoNumber{
+    text-align: right;
     color:$text;
-    float:right;
+}
+
+.graphPriceContainer{
+    width:100%;
+}
+
+.graphPriceInfo{
+    margin:0 auto;
+    width: 40%;
+    color:rgba($color: $text, $alpha: 0.6);
+    border-radius: 8px;
+    display: inline-block;
+    padding: 8px 8px;
+    background-color: $foreground;
+    margin: 5px 5px;
+}
+
+.graph{
+    width: 100%;
 }
 
 //Details page end

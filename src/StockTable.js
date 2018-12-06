@@ -28,7 +28,7 @@ class StockTable extends React.Component {
     render() {
         if (Array.isArray(this.state.list)) {
             return <div>
-                <table className="table">
+                <table className="stockTable">
                     <thead>
                         <tr>
                             <th className="rowNumber" scope="col">#</th>
@@ -49,8 +49,8 @@ class StockTable extends React.Component {
                                 <td className="symbol">{el.symbol}</td>
                                 <td className="companyName"><Link to={`/details/${el.symbol}`} className="link">{el.companyName}</Link></td>
                                 <td className="latestPrice">${el.latestPrice}</td>
-                                <td className="change">{el.change}</td>
-                                <td className="change">{this.truncate(el.changePercent*100, 4)}%</td>
+                                <td className={el.change >= 0 ? "change winner" : "change loser"}>{el.change}</td>
+                                <td className={el.change >= 0 ? "change winner" : "change loser"}>{this.truncate(el.changePercent*100, 4)}%</td>
 
                                 {
                                     this.state.url && this.state.LoggedIn && <td><button>add</button></td>//this adds an "add" button if we're on home and if the user is logged in

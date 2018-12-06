@@ -108,19 +108,19 @@ class StockDetail extends Component {
                             <tbody>
                                 <tr>
                                     <td>Low</td>
-                                    <td className="stockInfoNumber">{stock.low}</td>
+                                    <td className="stockInfoNumber">${stock.low}</td>
                                 </tr>
                                 <tr>
                                     <td>High</td>
-                                    <td className="stockInfoNumber">{stock.high}</td>
+                                    <td className="stockInfoNumber">${stock.high}</td>
                                 </tr>
                                 <tr>
                                     <td>Prev. Close</td>
-                                    <td className="stockInfoNumber">{stock.previousClose}</td>
+                                    <td className="stockInfoNumber">${stock.previousClose}</td>
                                 </tr>
                                 <tr>
                                     <td>Open</td>
-                                    <td className="stockInfoNumber">{stock.open}</td>
+                                    <td className="stockInfoNumber">${stock.open}</td>
                                 </tr>
                                 <tr>
                                     <td>Volume</td>
@@ -133,11 +133,11 @@ class StockDetail extends Component {
                             <tbody>
                                 <tr>
                                     <td>52wk Low</td>
-                                    <td className="stockInfoNumber">{stock.week52Low}</td>
+                                    <td className="stockInfoNumber">${stock.week52Low}</td>
                                 </tr>
                                 <tr>
                                     <td>52wk High</td>
-                                    <td className="stockInfoNumber">{stock.week52High}</td>
+                                    <td className="stockInfoNumber">${stock.week52High}</td>
                                 </tr>
                                 <tr>
                                     <td>Mkt Cap</td>

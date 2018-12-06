@@ -6,7 +6,7 @@ class StockDetail extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { user: props.username, stock: "empty", userList: [], following: false };
+        this.state = { user: props.username, stock: "empty", userList: [], stockAdded: "" };
     }
 
     componentDidMount = async () => {
@@ -18,6 +18,7 @@ class StockDetail extends Component {
                 return stock.symbol
             });
             this.setState({ userList: symbols });
+            console.log("symbollist" + symbols);
 
         }
 
@@ -32,6 +33,9 @@ class StockDetail extends Component {
         console.log(this.state.stock);
         console.log(this.props);
     }
+    componentWillReceiveProps(nextProps) {
+        this.setState({stockAdded: nextProps.stockAdded});
+      }
 
     componentWillUnmount() {
         clearInterval(this.timerID);
@@ -55,23 +59,20 @@ class StockDetail extends Component {
         return false;
     }
 
-    addStockToFav = async (evt) => {
-        evt.preventDefault();
-        await this.props.ApiFacade.addStockToFav("/api/user/" + this.props.username + "/add/" + this.props.match.params.symbol, true)
-            .then(res => this.setState(this.state));
+    addStockToFav = () => {
+        this.props.addStockToFav(this.props.match.params.symbol);
     }
 
-    removeStockFromFav = (evt) => {
-        evt.preventDefault();
-        this.props.ApiFacade.removeStockFromFav("/api/user/" + this.props.username + "/remove/" + this.props.match.params.symbol, true);
+    removeStockFromFav = () => {
+        this.props.removeStockFromFav(this.props.match.params.symbol);
     }
 
     followButton = () => {
         if (this.props.LoggedIn && this.checkIfUserFollow()) {
-            return <form onSubmit={this.addStockToFav}><button>Follow</button></form>
+            return <button className="form-submit hoverEffect" onClick={this.addStockToFav}>Follow</button>
         }
         else if (this.props.LoggedIn && !this.checkIfUserFollow()) {
-            return <form onSubmit={this.removeStockFromFav}><button>Unfollow</button></form>
+            return <button className="form-submit hoverEffect" onClick={this.removeStockFromFav}>Unfollow</button>
         }
         else return null;
     }
@@ -88,7 +89,8 @@ class StockDetail extends Component {
 
         const stock = this.state.stock;
         return (
-            <div>
+
+            < div >
                 <h1>{stock.companyName}</h1>
                 <h3>{stock.symbol}</h3>
 
@@ -116,9 +118,10 @@ class StockDetail extends Component {
                     </tbody>
                 </table>
                 <this.followButton />
+                <h4>{this.props.stockAdded}</h4>
 
                 {console.log(this.state.stock)}
-            </div>
+            </div >
         )
 
     }

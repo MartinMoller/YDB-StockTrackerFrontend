@@ -10,7 +10,7 @@ import StockDetail from './StockDetail';
 class App extends Component {
   constructor() {
     super();
-    this.state = { LoggedIn: false, username: "", redirect: false };
+    this.state = { LoggedIn: false, username: "", redirect: false, stockAdded: "" };
   }
 
   login = (user, pass) => {
@@ -23,6 +23,18 @@ class App extends Component {
   logout = () => {
     facade.logout();
     this.setState({ LoggedIn: false, redirect: false });
+  }
+
+
+  addStockToFav = (symbol) => {
+    facade.addStockToFav("/api/user/" + this.state.username + "/add/" + symbol, true)
+      .then(res => this.setState({ stockAdded: "Stock added" }));
+
+  }
+
+  removeStockFromFav = (symbol) => {
+    facade.removeStockFromFav("/api/user/" + this.state.username + "/remove/" + symbol, true)
+      .then(res => this.setState({ stockAdded: "Stock removed" }));
   }
 
   createUser = (user, pass) => {
@@ -62,7 +74,7 @@ class App extends Component {
             <Route path="/login" render={() => <Login redirect={this.state.redirect} login={this.login} />} />
             <Route path="/mylist" render={() => <MyList LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
             <Route path="/createuser" render={() => <CreateUser redirect={this.state.redirect} createUser={this.createUser} />} />
-            <Route path="/details/:symbol" render={(props) => <StockDetail {...props} LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
+            <Route path="/details/:symbol" render={(props) => <StockDetail {...props} addStockToFav={this.addStockToFav} stockAdded={this.stockAdded} removeStockFromFav={this.removeStockFromFav} LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
 
           </div>
         </Router>

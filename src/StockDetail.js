@@ -35,8 +35,8 @@ class StockDetail extends Component {
         //console.log(this.props);
     }
     componentWillReceiveProps(nextProps) {
-        this.setState({stockAdded: nextProps.stockAdded});
-      }
+        this.setState({ stockAdded: nextProps.stockAdded });
+    }
 
     componentWillUnmount() {
         clearInterval(this.timerID);
@@ -71,16 +71,6 @@ class StockDetail extends Component {
         this.props.removeStockFromFav(this.props.match.params.symbol);
     }
 
-    followButton = () => {
-        if (this.props.LoggedIn && this.checkIfUserFollow()) {
-            return <button className="form-submit hoverEffect" onClick={this.addStockToFav}>Follow</button>
-        }
-        else if (this.props.LoggedIn && !this.checkIfUserFollow()) {
-            return <button className="form-submit hoverEffect" onClick={this.removeStockFromFav}>Unfollow</button>
-        }
-        else return null;
-    }
-
     truncate(s, truncLength) {
         let workString = JSON.stringify(s);
         if (workString.length >= truncLength)
@@ -108,21 +98,21 @@ class StockDetail extends Component {
                         <div className="graphPriceInfo">
                             <img className="graph" src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" />
                             <table className="detailsTable">
-                            <tbody>
-                                <tr>
-                                    <td>Price</td>
-                                    <td className="stockInfoNumber">${stock.latestPrice}</td>
-                                </tr>
-                                <tr>
-                                    <td>+/-</td>
-                                    <td className="stockInfoNumber">{stock.change}</td>
-                                </tr>
-                                <tr>
-                                    <td>Percent Change</td>
-                                    <td className="stockInfoNumber">{this.truncate(stock.changePercent*100,4)}%</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                <tbody>
+                                    <tr>
+                                        <td>Price</td>
+                                        <td className="stockInfoNumber">${stock.latestPrice}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+/-</td>
+                                        <td className="stockInfoNumber">{stock.change}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Percent Change</td>
+                                        <td className="stockInfoNumber">{this.truncate(stock.changePercent * 100, 4)}%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div className="detailsTableContainer">
@@ -178,12 +168,13 @@ class StockDetail extends Component {
                     </div>
                 </div>
                 {this.checkIfUserFollow() === true && //If 
-                    <h1>Follow this stock</h1>
+                    <button className="form-submit hoverEffect" onClick={this.addStockToFav}>Follow</button>
                 }
                 {this.checkIfUserFollow() === false && this.props.username !== "" &&  //If 
 
-                    <h1>Unfollow this stock</h1>
+                    <button className="form-submit hoverEffect" onClick={this.removeStockFromFav}>Unfollow</button>
                 }
+                <h4>{this.state.stockAdded}</h4>
             </div>
         )
 

@@ -36,13 +36,10 @@ class StockTable extends React.Component {
                             <th className="companyName">Name</th>
                             <th className="latestPrice">Price</th>
                             <th className="change">+/-</th>
-<<<<<<< HEAD
-=======
                             <th className="change">%</th>
                             {
                                 this.state.url && this.props.LoggedIn && <th>add</th>//this adds an "add" header if we're on home and if the user is logged in
                             }
->>>>>>> origin/DetailFetchFromUser
                         </tr>
                     </thead>
                     <tbody>
@@ -53,15 +50,12 @@ class StockTable extends React.Component {
                                 <td className="companyName"><Link to={`/details/${el.symbol}`} className="link">{el.companyName}</Link></td>
                                 <td className="latestPrice">${el.latestPrice}</td>
                                 <td className="change">{el.change}</td>
-<<<<<<< HEAD
-=======
                                 <td className="change">{this.truncate(el.changePercent*100, 4)}%</td>
 
                                 {
                                     this.state.url && this.state.LoggedIn && <td><button>add</button></td>//this adds an "add" button if we're on home and if the user is logged in
                                 }
 
->>>>>>> origin/DetailFetchFromUser
                             </tr>)}
                     </tbody>
                 </table>

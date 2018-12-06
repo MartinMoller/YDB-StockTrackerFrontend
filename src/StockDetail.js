@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { Redirect } from 'react-router';
 
 class StockDetail extends Component {
 
@@ -58,7 +59,6 @@ class StockDetail extends Component {
         evt.preventDefault();
         await this.props.ApiFacade.addStockToFav("/api/user/" + this.props.username + "/add/" + this.props.match.params.symbol, true)
             .then(res => this.setState(this.state));
-        console.log("follow state" + this.state.following);
     }
 
     removeStockFromFav = (evt) => {

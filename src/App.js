@@ -51,7 +51,7 @@ class App extends Component {
             <nav className="header">
               <div className="nav-content">
                 <div>
-                  <NavLink className="nav-link navbar-brand" exact to="/">YDB Stock Tracker</NavLink>
+                  <NavLink exact to="/"><img className="logo nav-link navbar-brand" src={process.env.PUBLIC_URL + '/images/YDB_Logo.png'} alt="logo" /></NavLink>
                 </div>
                 <div className="header-nav">
                   <ul>

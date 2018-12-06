@@ -23,7 +23,7 @@ class Login extends Component {
         else {
             return (
                 <div className="container">
-                    <h2>Login</h2>
+                    <h1>Login</h1>
                     <form onSubmit={this.login} onChange={this.onChange} >
                         <input className="form-control" placeholder="User Name" id="username" />
                         <br></br>

@@ -10,9 +10,22 @@
     text-align: center;
 }
 
+.logo{
+    width: 7%;
+    float: left;
+    display: block;
+    margin-top: -1.7%;
+}
+
+.logo_frontpage{
+    width: 20%;
+    margin-top: -2%;
+}
+
 .navbar-brand{
     font-weight: 500;
-    font-size: 20px;
+    height: 70px;
+    width: auto;
     float: left;
     color: $text;
 }

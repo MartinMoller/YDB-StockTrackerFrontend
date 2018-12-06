@@ -13,12 +13,13 @@ class StockDetail extends Component {
 
         //Get the users symbollist if they are logged in.
         if (this.props.LoggedIn) {
-            const userList = await this.props.ApiFacade.fetchData("/api/user/" + this.props.username + "/list/", true);
-            let symbols = userList.map((stock) => {
-                return stock.symbol
-            });
-            this.setState({ userList: symbols });
-            console.log("symbollist" + symbols);
+            const userList = await this.props.ApiFacade.fetchData("/api/user/" + this.props.username + "/symList/", true);
+            if (Array.isArray(userList)) {
+                let symbols = userList.map((stock) => {
+                    return stock.symbol
+                });
+                this.setState({ userList: symbols });
+            }
 
         }
 
@@ -30,8 +31,8 @@ class StockDetail extends Component {
             5000
         );
 
-        console.log(this.state.stock);
-        console.log(this.props);
+        //console.log(this.state.stock);
+        //console.log(this.props);
     }
     componentWillReceiveProps(nextProps) {
         this.setState({stockAdded: nextProps.stockAdded});
@@ -46,16 +47,19 @@ class StockDetail extends Component {
         this.setState({
             list: fetchRes
         })
-        console.log("HEJ")
+        //console.log("HEJ")
     }
 
     checkIfUserFollow = () => {
         if (this.props.LoggedIn) {
             return !this.state.userList.includes(this.props.match.params.symbol);
         }
+        else {
+
+        }
 
 
-        console.log(this.state.username)
+        //console.log(this.state.username)
         return false;
     }
 
@@ -77,8 +81,16 @@ class StockDetail extends Component {
         else return null;
     }
 
+    truncate(s, truncLength) {
+        let workString = JSON.stringify(s);
+        if (workString.length >= truncLength)
+            return workString.substring(0, truncLength);
+        else
+            return workString;
+    }
 
     render() {
+        //console.log("USernmae" + this.props.username)
         if (this.state.stock === "empty") {
             return (
                 <div>
@@ -89,39 +101,90 @@ class StockDetail extends Component {
 
         const stock = this.state.stock;
         return (
+            <div>
+                <h1>{stock.companyName} ({stock.symbol})</h1>
+                <div className="detailsBox">
+                    <div className="graphPriceContainer">
+                        <div className="graphPriceInfo">
+                            <img className="graph" src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" />
+                            <table className="detailsTable">
+                            <tbody>
+                                <tr>
+                                    <td>Price</td>
+                                    <td className="stockInfoNumber">${stock.latestPrice}</td>
+                                </tr>
+                                <tr>
+                                    <td>+/-</td>
+                                    <td className="stockInfoNumber">{stock.change}</td>
+                                </tr>
+                                <tr>
+                                    <td>Percent Change</td>
+                                    <td className="stockInfoNumber">{this.truncate(stock.changePercent*100,4)}%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <div className="detailsTableContainer">
+                        <table className="detailsTable">
+                            <tbody>
+                                <tr>
+                                    <td>Low</td>
+                                    <td className="stockInfoNumber">{stock.low}</td>
+                                </tr>
+                                <tr>
+                                    <td>High</td>
+                                    <td className="stockInfoNumber">{stock.high}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prev. Close</td>
+                                    <td className="stockInfoNumber">{stock.previousClose}</td>
+                                </tr>
+                                <tr>
+                                    <td>Open</td>
+                                    <td className="stockInfoNumber">{stock.open}</td>
+                                </tr>
+                                <tr>
+                                    <td>Volume</td>
+                                    <td className="stockInfoNumber">{stock.latestVolume}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-            < div >
-                <h1>{stock.companyName}</h1>
-                <h3>{stock.symbol}</h3>
+                        <table className="detailsTable">
+                            <tbody>
+                                <tr>
+                                    <td>52wk Low</td>
+                                    <td className="stockInfoNumber">{stock.week52Low}</td>
+                                </tr>
+                                <tr>
+                                    <td>52wk High</td>
+                                    <td className="stockInfoNumber">{stock.week52High}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mkt Cap</td>
+                                    <td className="stockInfoNumber">{stock.marketCap}</td>
+                                </tr>
+                                <tr>
+                                    <td>P/E</td>
+                                    <td className="stockInfoNumber">{stock.peRatio === null ? "No info" : stock.peRatio}</td>
+                                </tr>
+                                <tr>
+                                    <td>YTD</td>
+                                    <td className="stockInfoNumber">{this.truncate(stock.ytdChange, 5)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {this.checkIfUserFollow() === true && //If 
+                    <h1>Follow this stock</h1>
+                }
+                {this.checkIfUserFollow() === false && this.props.username !== "" &&  //If 
 
-
-
-
-                <img src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" style={{ width: 500, height: 300 }} />
-
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th className="symbol">Symbol</th>
-                            <th className="latestPrice">Price</th>
-                            <th className="change">+/-</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr className="hoverEffect" key={stock.name}>
-                            <td className="symbol">{stock.symbol}</td>
-                            <td className="latestPrice">{stock.latestPrice}</td>
-                            <td className="change">{stock.change}</td>
-
-                        </tr>
-                    </tbody>
-                </table>
-                <this.followButton />
-                <h4>{this.props.stockAdded}</h4>
-
-                {console.log(this.state.stock)}
-            </div >
+                    <h1>Unfollow this stock</h1>
+                }
+            </div>
         )
 
     }

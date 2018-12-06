@@ -6,7 +6,7 @@ class StockDetail extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { user: props.username, stock: "empty", userList: [], stockAdded: "" };
+        this.state = { user: props.username, stock: "empty", userList: [] };
     }
 
     componentDidMount = async () => {
@@ -21,9 +21,6 @@ class StockDetail extends Component {
         this.timerID = setInterval(() => this.tick(),
             5000
         );
-    }
-    componentWillReceiveProps(nextProps) {
-        this.setState({ stockAdded: nextProps.stockAdded });
     }
 
     componentWillUnmount() {
@@ -53,10 +50,12 @@ class StockDetail extends Component {
 
     addStockToFav = () => {
         this.props.addStockToFav(this.props.match.params.symbol);
+        alert("Stock added");
     }
 
     removeStockFromFav = () => {
         this.props.removeStockFromFav(this.props.match.params.symbol);
+        alert("Stock removed");
     }
 
     truncate(s, truncLength) {
@@ -161,7 +160,6 @@ class StockDetail extends Component {
                 {this.checkIfUserFollow() === false && this.props.username !== "" &&  //If 
                     <button className="form-submit hoverEffect" onClick={this.removeStockFromFav}>Unfollow</button>
                 }
-                <h4>{this.state.stockAdded}</h4>
             </div>
         )
 

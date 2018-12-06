@@ -74,7 +74,7 @@ class App extends Component {
             <Route path="/login" render={() => <Login redirect={this.state.redirect} login={this.login} />} />
             <Route path="/mylist" render={() => <MyList LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
             <Route path="/createuser" render={() => <CreateUser redirect={this.state.redirect} createUser={this.createUser} />} />
-            <Route path="/details/:symbol" render={(props) => <StockDetail {...props} addStockToFav={this.addStockToFav} stockAdded={this.stockAdded} removeStockFromFav={this.removeStockFromFav} LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
+            <Route path="/details/:symbol" render={(props) => <StockDetail {...props} addStockToFav={this.addStockToFav} stockAdded={this.state.stockAdded} removeStockFromFav={this.removeStockFromFav} LoggedIn={this.state.LoggedIn} username={this.state.username} ApiFacade={facade} />} />
 
           </div>
         </Router>

@@ -61,7 +61,7 @@ class StockDetail extends Component {
 
 
     render() {
-        console.log("USernmae" +this.props.username)
+        console.log("USernmae" + this.props.username)
         if (this.state.stock === "empty") {
             return (
                 <div>
@@ -103,9 +103,9 @@ class StockDetail extends Component {
                 {this.checkIfUserFollow() === true && //If 
                     <h1>Follow this stock</h1>
                 }
-                { this.checkIfUserFollow() === false && this.props.username !== "" &&  //If 
-                    
-                        <h1>Unfollow this stock</h1>
+                {this.checkIfUserFollow() === false && this.props.username !== "" &&  //If 
+
+                    <h1>Unfollow this stock</h1>
                 }
 
                 {console.log(this.state.stock)}

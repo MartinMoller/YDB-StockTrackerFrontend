@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Redirect } from 'react-router'
-import { BrowserRouter as NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 class Login extends Component {
@@ -31,7 +31,7 @@ class Login extends Component {
                         <br />
                         <button className="form-submit hoverEffect">Login</button>
                         <br></br>
-                        <NavLink className="link" to="/createuser">Create user</NavLink>
+                        <Link className="link" to="/createuser">Create user</Link>
                     </form>
                 </div>
             )

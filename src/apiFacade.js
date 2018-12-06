@@ -1,4 +1,4 @@
-const URL = "https://skole.rasmuslumholdt.dk/YDB-StockTackerBackend-1.0-SNAPSHOT";
+const URL = "http://localhost:8084/ydbStockBackend";
 
 
 function handleHttpErrors(res) {
@@ -64,7 +64,7 @@ class ApiFacade {
     }
 
     addStockToFav = (params, tokenBool) => {
-        const options = this.smakeOptions("POST", tokenBool);
+        const options = this.makeOptions("POST", tokenBool);
         return fetch(URL + params, options)
             .then(res => res.json())
     }

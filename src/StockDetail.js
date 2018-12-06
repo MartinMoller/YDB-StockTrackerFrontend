@@ -14,25 +14,13 @@ class StockDetail extends Component {
         //Get the users symbollist if they are logged in.
         if (this.props.LoggedIn) {
             const userList = await this.props.ApiFacade.fetchData("/api/user/" + this.props.username + "/symList/", true);
-            if (Array.isArray(userList)) {
-                let symbols = userList.map((stock) => {
-                    return stock.symbol
-                });
-                this.setState({ userList: symbols });
-            }
-
+            this.setState({ userList: userList });
         }
-
         let fetchRes = await this.props.ApiFacade.fetchData("/api/stocks/single/" + this.props.match.params.symbol, false);
         this.setState({ stock: fetchRes });
-
-
         this.timerID = setInterval(() => this.tick(),
             5000
         );
-
-        //console.log(this.state.stock);
-        //console.log(this.props);
     }
     componentWillReceiveProps(nextProps) {
         this.setState({ stockAdded: nextProps.stockAdded });
@@ -171,7 +159,6 @@ class StockDetail extends Component {
                     <button className="form-submit hoverEffect" onClick={this.addStockToFav}>Follow</button>
                 }
                 {this.checkIfUserFollow() === false && this.props.username !== "" &&  //If 
-
                     <button className="form-submit hoverEffect" onClick={this.removeStockFromFav}>Unfollow</button>
                 }
                 <h4>{this.state.stockAdded}</h4>

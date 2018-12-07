@@ -54,11 +54,14 @@ class App extends Component {
           <div>
             <nav className="header">
               <div className="nav-content">
-                <div>
+                <div className="logo">
                   <NavLink className="nav-link navbar-brand" exact to="/">YDB Stock Tracker</NavLink>
                 </div>
+                <form className="searchBar" onSubmit={this.handleSubmit}>
+                  <input id="searchText" className="form-control" type="text" value={this.state.searchField} onChange={this.handleSearchInput} />
+                  <input type="submit" className="form-submit hoverEffect" value="Search" />
+                </form>
                 <div className="header-nav">
-                  <form onSubmit={this.handleSubmit}><input id="searchText" className="searchArea" type="text" value={this.state.searchField} onChange={this.handleSearchInput} /><input type="submit" value="Searchasd" /></form>
                   <ul>
                     <li className="nav-item hoverEffect">
                       <NavLink className="nav-link" exact to="/">Home</NavLink>

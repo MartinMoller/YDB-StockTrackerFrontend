@@ -4,6 +4,9 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700');
 
 //Nav start
+.logo{
+    float:left;
+}
 .header-nav li a {
     display:block;
     color: $text;
@@ -154,5 +157,11 @@ ul {
 
 .hoverEffect:hover{
     background: rgba($color: $text, $alpha: 0.1) !important;
+}
+
+.searchBar{
+    display: inline-block;
+    width:50%;
+    padding:15px 16px;
 }
 //General style end

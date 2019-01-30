@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import { Redirect } from 'react-router';
+import { Line } from 'react-chartjs-2';
 
 class StockDetail extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { user: props.username, stock: "empty", userList: [] };
+        this.state = { user: props.username, stock: "empty", userList: [], chartHigh: [] };
     }
 
     componentDidMount = async () => {
@@ -18,6 +19,33 @@ class StockDetail extends Component {
         }
         let fetchRes = await this.props.ApiFacade.fetchData("/api/stocks/single/" + this.props.match.params.symbol, false);
         this.setState({ stock: fetchRes });
+        let dataFetch = await fetch("https://api.iextrading.com/1.0/stock/" + this.props.match.params.symbol + "/chart");
+        let dataJson = await dataFetch.json();
+        let highArr = [];
+        dataJson.forEach(element => {
+            highArr.push(element.high);
+        });
+        let labels = [];
+        dataJson.forEach(el => {
+            labels.push(el.date);
+        })
+        var data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: "High",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: highArr
+                }
+            ]
+        };
+        this.setState({ chartHigh: data });
+        console.log(this.state.chartHigh);
         this.timerID = setInterval(() => this.tick(),
             5000
         );
@@ -83,7 +111,7 @@ class StockDetail extends Component {
                 <div className="detailsBox">
                     <div className="graphPriceContainer">
                         <div className="graphPriceInfo">
-                            <img className="graph" src={process.env.PUBLIC_URL + '/images/stock.jpg'} alt="StockImage" />
+                            < Line data={this.state.chartHigh} />
                             <table className="detailsTable">
                                 <tbody>
                                     <tr>

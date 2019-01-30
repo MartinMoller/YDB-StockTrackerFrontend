@@ -1,4 +1,4 @@
-const URL = "http://localhost:8084/ydbStockBackend";
+const URL = "https://martinmøller.com/YDB%2DStockTackerBackend%2D1.0%2DSNAPSHOT/";
 
 
 function handleHttpErrors(res) {
